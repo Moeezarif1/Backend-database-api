@@ -163,10 +163,17 @@ upheld, essential for modern web applications.
    distributing incoming traffic across multiple servers, ensuring high availability
 
 
-3. When you have a really big database with lots of tables and columns, it's very 
-important to organize it well. You should use smart ways to quickly find data 
-(that's what indexing is) and split your tables into parts to manage them better. 
-Also, using distributed databases – these are databases spread out over several 
-computers or servers – is a good idea. This helps in handling the data more
- efficiently, makes sure everything runs smoothly, and can keep up with a lot
-  of information being used at the same time.
+3. If faced with the challenge of adapting our system to support databases 
+   with up to 10,000 tables or even those with a million columns across 100,000 
+   tables, our design approach would undergo significant modifications to ensure 
+   efficient and scalable operations. Firstly, we would integrate advanced batch 
+   processing techniques to manage schema information retrieval in increments, 
+   preventing any timeouts due to excessively long queries. Caching strategies 
+   would also play a crucial role, particularly for infrequently changing schema
+   information, to reduce redundant queries and alleviate the load on both our system 
+   and the user databases.
+   Incorporating asynchronous processing would be essential to facilitate multiple 
+   concurrent connections to various databases without impeding the API service's 
+   responsiveness. For the vast amounts of data expected in the responses, we would
+   implement pagination to deliver the schema information in manageable segments, thus
+   ensuring that our API remains swift and the data transfer to clients is practical.
